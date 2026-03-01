@@ -33,4 +33,36 @@
  */
 export function calculateAutoFare(distance, waitingMinutes = 0) {
   // Your code here
+  
+  let distac=0;
+  let wating=0;
+  let price=0;
+  if(distance<=0||waitingMinutes<0||typeof distance==="string" || distance===undefined) return -1
+  Math.ceil(waitingMinutes)
+  distance = Math.ceil(distance)
+  while(distance>distac){
+    distac++
+    if(distac===1){
+      price=price+30
+      
+    }else
+    if(distac>=2&&distac<=5){
+      price=price+15
+
+    }else
+    if(distac>5 || distac<=distance){
+      price=price+10
+    }
+    if(waitingMinutes>0){
+      price=price+5*Math.ceil(waitingMinutes/2)
+      waitingMinutes=0
+    }
+
+    // if(distac>distance){
+    //   return price
+    // }
+
+  }
+  
+  return price
 }

@@ -27,5 +27,20 @@
  *   // => { totalChai: 0, totalRevenue: 0 }
  */
 export function chaiTapriRevenue(customers) {
-  // Your code here
+  if(customers<=0 || customers%1!==0) return { totalChai: 0, totalRevenue: 0 }
+  let totalRevenue=0;
+  let totalChai=0;
+  for(let i=1;i<=customers;i++){
+    if(i%3===0 && i!==0){
+      totalChai = totalChai + 1
+      totalRevenue = totalRevenue + 15
+      continue
+    }
+    if(i%3!==0){
+      totalChai = totalChai + 1
+      totalRevenue = totalRevenue + 10 
+      continue
+    }
+  }
+  return {totalChai,totalRevenue}
 }

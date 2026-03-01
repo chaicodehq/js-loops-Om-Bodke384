@@ -38,4 +38,53 @@
  */
 export function iplPointsTable(matches) {
   // Your code here
+  if(!Array.isArray(matches)) return []
+  if (matches.length === 0) {
+    return [];
+  }
+
+  const pointsTable = {};
+
+  for (let i = 0; i < matches.length; i++) {
+    const match = matches[i];
+    const team1 = match.team1;
+    const team2 = match.team2;
+    const result = match.result;
+    const winner = match.winner;
+
+    if (!pointsTable[team1]) {
+      pointsTable[team1] = { team: team1, played: 0, won: 0, lost: 0, tied: 0, noResult: 0, points: 0 };
+    }
+    if (!pointsTable[team2]) {
+      pointsTable[team2] = { team: team2, played: 0, won: 0, lost: 0, tied: 0, noResult: 0, points: 0 };
+    }
+
+    pointsTable[team1].played++;
+    pointsTable[team2].played++;
+
+    if (result === "win") {
+      const loser = winner === team1 ? team2 : team1;
+      pointsTable[winner].won++;
+      pointsTable[winner].points += 2;
+      pointsTable[loser].lost++;
+    } else if (result === "tie") {
+      pointsTable[team1].tied++;
+      pointsTable[team2].tied++;
+      pointsTable[team1].points += 1;
+      pointsTable[team2].points += 1;
+    } else if (result === "no_result") {
+      pointsTable[team1].noResult++;
+      pointsTable[team2].noResult++;
+      pointsTable[team1].points += 1;
+      pointsTable[team2].points += 1;
+    }
+  }
+
+  return Object.values(pointsTable).sort((a, b) => {
+    if (a.points !== b.points) {
+      return b.points - a.points;
+    } else {
+      return a.team.localeCompare(b.team);
+    }
+  })
 }

@@ -36,5 +36,16 @@
  *   rangoli(3) // => ["  *", " * *", "* * *", " * *", "  *"]
  */
 export function rangoli(n) {
-  // Your code here
+  if(typeof n !== "number" || n <= 0 || n % 1 !== 0) return []
+  let result = []
+  let totalRows = 2 * n - 1
+  for(let i =0;i<totalRows;i++){
+    let stars = i <n ? i + 1 : totalRows - i
+    let spaces = n - stars
+    result.push(" ".repeat(spaces) + "* ".repeat(stars).trim())
+
+
+
+  }
+  return result
 }
